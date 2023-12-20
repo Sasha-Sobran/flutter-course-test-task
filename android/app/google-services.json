@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "312003637149",
+    "project_id": "course-test-task",
+    "storage_bucket": "course-test-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312003637149:android:a780d32899c62af9804974",
+        "android_client_info": {
+          "package_name": "com.example.course_test_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnk0KTEg_AygahPG-v56n_35j0LDt_4fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
