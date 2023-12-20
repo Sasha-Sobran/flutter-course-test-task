@@ -1,3 +1,4 @@
+import 'package:course_test_task/src/components/custom_text_field.dart';
 import 'package:course_test_task/src/constants/firabase_database.dart';
 import 'package:course_test_task/src/constants/text_constants.dart';
 import 'package:course_test_task/src/pages/home_page.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+  LoginPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormBuilderState>();
 
@@ -70,29 +71,7 @@ class LoginPage extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      alignment: Alignment.center,
-                      width: 323,
-                      height: 66,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: FormBuilderTextField(
-                        name: 'id',
-                        decoration: const InputDecoration(
-                          hintText: 'Enter chat id',
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ),
+                  const CustomTextField(name: "id", hintText: S.enterChatId),
                   MaterialButton(
                     color: Theme.of(context).colorScheme.secondary,
                     onPressed: () async {

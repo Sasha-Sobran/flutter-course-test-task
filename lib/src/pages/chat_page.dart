@@ -4,6 +4,7 @@ import 'package:course_test_task/src/components/chat_messages.dart';
 import 'package:course_test_task/src/components/message.dart';
 import 'package:course_test_task/src/constants/firabase_database.dart';
 import 'package:course_test_task/src/constants/image_constants.dart';
+import 'package:course_test_task/src/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -139,7 +140,7 @@ class ChatPageState extends State<ChatPage> {
                             },
                             child: Image.asset(Assets.paperAirplane),
                           ),
-                          hintText: 'Enter chat id',
+                          hintText: S.enterChatId,
                           border: InputBorder.none,
                         ),
                       ),

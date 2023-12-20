@@ -10,19 +10,11 @@ class HomePage extends StatelessWidget {
   HomePage({super.key, required this.user});
 
   Future<Map<String, dynamic>> toChat(values) async {
-    final event1 = await database.child("/users/${values["id"]}/name").once();
-
-    final receiver = event1.snapshot.value;
-
+    final receiver = await getReceiver(values);
     if (receiver != null) {
-      final event2 = await database
-          .child("/users/${user["id"]}/chat/${values["id"]}")
-          .once();
-      
-      final chat = event2.snapshot.value;
-
+      final chat = await getChat(values);
       if (chat == null) {
-        database.child("/users/${user["id"]}/chat").set("${values["id"]}");
+        await createChat(values);
       }
       return {
         "success": true,
@@ -31,6 +23,22 @@ class HomePage extends StatelessWidget {
     } else {
       return {"success": false};
     }
+  }
+
+  Future<String?> getReceiver(values) async {
+    final event1 = await database.child("/users/${values["id"]}/name").once();
+    return event1.snapshot.value as String?;
+  }
+
+  Future<dynamic> getChat(values) async {
+    final event2 = await database
+        .child("/users/${user["id"]}/chat/${values["id"]}")
+        .once();
+    return event2.snapshot.value;
+  }
+
+  Future<void> createChat(values) async {
+    await database.child("/users/${user["id"]}/chat").set("${values["id"]}");
   }
 
   final _formKey = GlobalKey<FormBuilderState>();
@@ -50,7 +58,7 @@ class HomePage extends StatelessWidget {
             context: context,
             builder: (BuildContext dialogContext) {
               return AlertDialog(
-                title: const Text("Account with such id doesnt exists"),
+                title: const Text(S.errorMessage),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -171,7 +179,7 @@ class HomePage extends StatelessWidget {
                                   },
                                   child: Image.asset(Assets.paperAirplane),
                                 ),
-                                hintText: 'Enter chat id',
+                                hintText: S.enterChatId,
                                 border: InputBorder.none,
                               ),
                             ),

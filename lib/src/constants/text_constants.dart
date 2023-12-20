@@ -7,4 +7,12 @@ class S {
   static const String signup = "Sign up";
   static const String loginer = "Already have an account?";
   static const String logIn = "log in";
+  static const String enterChatId = 'Enter chat id';
+  static const String enterName = 'Enter name';
+  static const String signUpButton = 'Sign up';
+  static const String successMessage =
+      'You are successfully signed up. Now you can login.';
+  static const String errorMessage =
+      'ID already exists. Please choose a different ID.';
+  static const String Register = 'Register';
 }

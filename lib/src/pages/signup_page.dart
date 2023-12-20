@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:course_test_task/src/components/custom_text_field.dart';
 import 'package:course_test_task/src/constants/firabase_database.dart';
 import 'package:course_test_task/src/constants/text_constants.dart';
 import 'package:course_test_task/src/pages/login_page.dart';
@@ -13,10 +14,10 @@ class SignupPage extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
 
   Future<bool> registerUser(user) async {
-    DatabaseEvent event = await database.child("/users/${user["id"]}/name").once();
+    DatabaseEvent event = await database.child("/users/${user["id"]}").once();
     Map<dynamic, dynamic>? data = event.snapshot.value as Map?;
 
-    if (data != null) {
+    if (data != null && data.containsKey('id')) {
       return false;
     } else {
       await database.child("/users/${user["id"]}/name").set(user["name"]);
@@ -29,9 +30,7 @@ class SignupPage extends StatelessWidget {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text(success
-              ? "You are successfully signed up. Now you can login."
-              : "ID already exists. Please choose a different ID."),
+          title: Text(success ? S.successMessage : S.errorMessage),
           actions: [
             TextButton(
               onPressed: () {
@@ -66,52 +65,8 @@ class SignupPage extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      alignment: Alignment.center,
-                      width: 323,
-                      height: 66,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: FormBuilderTextField(
-                        name: 'id',
-                        decoration: const InputDecoration(
-                          hintText: 'Enter chat id',
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      alignment: Alignment.center,
-                      width: 323,
-                      height: 66,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: FormBuilderTextField(
-                        name: 'name',
-                        decoration: const InputDecoration(
-                          hintText: 'Enter name',
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ),
+                  const CustomTextField(name: 'id', hintText: S.enterChatId),
+                  const CustomTextField(name: 'name', hintText: S.enterName),
                   MaterialButton(
                     color: Theme.of(context).colorScheme.secondary,
                     onPressed: () async {
@@ -123,7 +78,7 @@ class SignupPage extends StatelessWidget {
                         showResultDialog(context, success);
                       }
                     },
-                    child: const Text('Sign up'),
+                    child: const Text(S.signUpButton),
                   )
                 ],
               ),
