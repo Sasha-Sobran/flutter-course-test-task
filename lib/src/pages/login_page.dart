@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
             context: context,
             builder: (BuildContext dialogContext) {
               return AlertDialog(
-                title: const Text("Account with such id doesnt exists"),
+                title: const Text(S.errorMessage2),
                 actions: [
                   TextButton(
                     onPressed: () {

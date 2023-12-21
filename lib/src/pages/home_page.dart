@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
             context: context,
             builder: (BuildContext dialogContext) {
               return AlertDialog(
-                title: const Text(S.errorMessage),
+                title: const Text(S.errorMessage2),
                 actions: [
                   TextButton(
                     onPressed: () {

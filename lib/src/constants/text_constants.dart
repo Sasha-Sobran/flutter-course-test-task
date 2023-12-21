@@ -13,6 +13,7 @@ class S {
   static const String successMessage =
       'You are successfully signed up. Now you can login.';
   static const String errorMessage =
-      'ID already exists. Please choose a different ID.';
-  static const String Register = 'Register';
+      'ID already exists or data is not valid.';
+  static const String errorMessage2 =
+      'Account with such id doesn`t exists.';
 }

@@ -16,8 +16,11 @@ class SignupPage extends StatelessWidget {
   Future<bool> registerUser(user) async {
     DatabaseEvent event = await database.child("/users/${user["id"]}").once();
     Map<dynamic, dynamic>? data = event.snapshot.value as Map?;
-
-    if (data != null && data.containsKey('id')) {
+    if (data != null ||
+        user["id"] == null ||
+        user["name"].length > 12 ||
+        user["id"].length > 6 ||
+        user["id"].length < 1) {
       return false;
     } else {
       await database.child("/users/${user["id"]}/name").set(user["name"]);
